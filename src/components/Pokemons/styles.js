@@ -166,6 +166,9 @@ export const Procurar = styled.div`
       margin-top: 40px;
       display: flex;
       justify-content: space-between;
+      @media screen and (max-width: 800px) {
+        margin: 20px 0;
+      }
     }
   }
 `;
