@@ -25,7 +25,7 @@ export default function Pokemon() {
   }
 
   useEffect(() => {
-    fetch('https://pokeapi.co/api/v2/pokemon/?offset=00&limit=200')
+    fetch('https://pokeapi.co/api/v2/pokemon/?offset=00&limit=100')
       .then((r) => r.json())
       .then((json) => {
         const result = json.results;
@@ -47,9 +47,10 @@ export default function Pokemon() {
             <input type="text" placeholder="Digite o nome do Pokemon" ref={filterRef} />
             <div>
               <button type="submit"><MdSearch size={30}/>Procurar</button>
+              <button type="button" onClick={handleAll}><GiReturnArrow size={30}/>Todos</button>
             </div>
           </form>
-          <button type="button" onClick={handleAll}><GiReturnArrow size={30}/>Todos</button>
+         
         </section>
       </Procurar>
 

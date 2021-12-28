@@ -1,13 +1,5 @@
-## CRA template Agência Ade!
+## Pokedéx!
 
-O template mais fuderoso para iniciar um site em React! 🤘🏻
+Teste React JS desenvolvido para a empresa Losung🤘🏻
 
-### Dependências de desenvolvimento
 
-Após baixar, rode o seguinte comando para instalar todas as dependencias necessárias.
-
-`yarn add prettier -D`
-
----
-
-Feito com ❤️ por [ade.ag](https://ade.ag)
