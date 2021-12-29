@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { getPokemonData, getPokemons } from "../../services/api";
 import { Link } from 'react-router-dom';
 import { Char, Procurar, Flex } from './styles';
 import { MdSearch } from 'react-icons/md';
@@ -24,20 +25,40 @@ export default function Pokemon() {
     setPokemonsFiltered([]);
   }
 
-  useEffect(() => {
-    fetch('https://pokeapi.co/api/v2/pokemon/?offset=00&limit=100')
-      .then((r) => r.json())
-      .then((json) => {
-        const result = json.results;
-        const pokemonsAll = result.map(({name,url})=>
-          ({
-            name,
-            id: url.match(/\/(\d+)\//)[1],
-          })
-        )
-        setPokemons(pokemonsAll);
+  // useEffect(() => {
+  //   fetch('https://pokeapi.co/api/v2/pokemon/?offset=00&limit=100')
+  //     .then((r) => r.json())
+  //     .then((json) => {
+  //       const result = json.results;
+  //       const pokemonsAll = result.map(({name,url})=>{  
+  //         ({
+  //           type: pokemonsType,
+  //           name,
+  //           id: url.match(/\/(\d+)\//)[1],
+  //         })}
+  //       )
+  //       setPokemons(pokemonsAll);
+  //       console.log(pokemonsType)
+  //     });
+  // }, [pokemons]);
+  const fetchPokemons = async () => {
+    try {
+      const data = await getPokemons(150,0);
+      const promises = data.results.map(async (pokemon) => {
+        return await getPokemonData(pokemon.url);
       });
-  }, [pokemons]);
+      const results = await Promise.all(promises);
+      setPokemons(results);
+      console.log(results)
+      
+    } catch (err) {}
+  };
+
+  useEffect(() => {
+      fetchPokemons();
+  }, []);
+
+
 
   return (
     <>
@@ -55,23 +76,23 @@ export default function Pokemon() {
       </Procurar>
 
       <Flex className="container">
-        {pokemonsFiltered.length === 0 ? pokemons.map(({ name, id }) => (
-          <Char key={id}>
-            <Link to={`/${name}`}>
-              <section className="card">
-                <span>{`#${id}`}</span>
-                <img alt="Logo Pokemon"src={`${imageUrl}dream-world/${id}.svg`}/>
-                <h2>{name}</h2>
+        {pokemonsFiltered.length === 0 ? pokemons.map((pokemon) => (
+          <Char key={pokemon.id}>
+            <Link to={`/${pokemon.name}`}>
+              <section className={`card ${pokemon.types[0].type.name}`}>
+                <span className={pokemon.types[0].type.name}>{`#${pokemon.id}`}</span>
+                <img alt="Logo Pokemon"src={`${imageUrl}dream-world/${pokemon.id}.svg`}/>
+                <h2 className={pokemon.types[0].type.name}>{pokemon.name}</h2>
               </section>
             </Link>
           </Char>
-          )) : pokemonsFiltered.map(({ name, id }) => (
-          <Char key={id}>
-            <Link to={`/${name}`}>
-              <section className="card">
-                <span>{`#${id}`}</span>
-                <img alt="Logo Pokemon"src={`${imageUrl}dream-world/${id}.svg`}/>
-                <h2>{name}</h2>
+          )) : pokemonsFiltered.map((pokemon) => (
+            <Char key={pokemon.id}>
+            <Link to={`/${pokemon.name}`}>
+              <section className={`card ${pokemon.types[0].type.name}`}>
+                <span className={pokemon.types[0].type.name}>{`#${pokemon.id}`}</span>
+                <img alt="Logo Pokemon"src={`${imageUrl}dream-world/${pokemon.id}.svg`}/>
+                <h2 className={pokemon.types[0].type.name}>{pokemon.name}</h2>
               </section>
             </Link>
           </Char>

@@ -59,6 +59,10 @@ export const NameMenu = styled.div`
 export const SlidePokemon = styled.div`
   position: relative;
   z-index: 999;
+  border: 0px;
+  :hover {
+    background-color: transparent;
+  }
  .bigPokeball {
     position: absolute;
     opacity: 0.03;
@@ -152,6 +156,10 @@ export const About = styled.div`
     font-size: 50px;
     margin-top: 40px;
     background-color: transparent;
+    border: 0px;
+    :hover {
+      background-color: transparent !important;
+    }
     @media screen and (max-width: 800px) {
     font-size: 30px;
     }
@@ -276,6 +284,10 @@ export const Stats = styled.div`
     text-align: center;
     background-color: transparent;
     font-size: 50px;
+    border: 0px;
+    :hover {
+      background-color: transparent !important;
+    }
     @media screen and (max-width: 800px) {
     font-size: 30px;
     }
@@ -299,6 +311,10 @@ export const Stats = styled.div`
       font-weight: bold;
       background-color: transparent;
       text-align: center;
+      border: 0px;
+      :hover {
+        background-color: transparent !important;
+      }
       @media screen and (max-width: 800px) {
         font-size: 14px;
         margin-bottom: 20px;

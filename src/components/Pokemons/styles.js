@@ -8,7 +8,6 @@ export const Char = styled.div`
 
   .card {
     background-color: white;
-    border: 3px solid green;
     border-radius: 20px;
     position: relative;
     transition: all 0.5s;
@@ -21,7 +20,8 @@ export const Char = styled.div`
     top: 15px;
     right: 15px;
     font-size: 30px;
-    color: green;
+    border: 0px;
+    background-color: transparent;
     @media screen and (max-width: 800px) {
       font-size: 15px;
       top: 5px;
@@ -43,12 +43,12 @@ export const Char = styled.div`
   h2 {
     transition: all .3s;
     width: 100.2%;
-    background-color: green;
     text-align: center;
     font-size: 30px;
     margin-bottom: -0.5px;
     padding: 20px 0;
     color: white;
+    border: 3px solid transparent;
     text-transform: capitalize;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
@@ -66,14 +66,9 @@ export const Char = styled.div`
   }
   .card:hover {
       box-shadow: 5px 5px 10px rgb(0,0,0,0.25);
-      background-color: green;
       img {
         width: 70%;
         filter: brightness(130%);
-      }
-      h2 {
-        background-color: white;
-        color: green;
       }
       span {
         color: white;
